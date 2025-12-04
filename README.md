@@ -1,2 +1,10 @@
-# a23xq_new_recovery_stock
-recovery for samsung a23 5g
+# Android device tree for samsung SM-A236B (a23xq)
+
+```
+#
+# Copyright (C) 2025 The Android Open Source Project
+# Copyright (C) 2025 SebaUbuntu's TWRP device tree generator
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+```
