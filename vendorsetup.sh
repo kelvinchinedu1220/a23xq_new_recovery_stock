@@ -6,6 +6,7 @@
 #
 
 # For building with minimal manifest
+export FOX_BUILD_DEVICE="a23xq"
 export ALLOW_MISSING_DEPENDENCIES="true"
 export OF_DISABLE_MIUI_SPECIFIC_FEATURES="1"
 export OF_DONT_PATCH_ENCRYPTED_DEVICE="1"
