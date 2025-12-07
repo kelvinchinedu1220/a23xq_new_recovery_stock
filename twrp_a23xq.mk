@@ -1,29 +1,44 @@
 #
-# Copyright (C) 2025 The Android Open Source Project
-# Copyright (C) 2025 SebaUbuntu's TWRP device tree generator
+# Copyright (C) 2023 The Android Open Source Project
 #
-# SPDX-License-Identifier: Apache-2.0
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 #
 
-# Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+# Release name
+PRODUCT_RELEASE_NAME := a23xq
 
-# Inherit some common twrp stuff.
+# Inherit from common AOSP config
+$(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
+
+# Enable project quotas and casefolding for emulated storage without sdcardfs
+$(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
+
+# Inherit some common TWRP stuff.
 $(call inherit-product, vendor/twrp/config/common.mk)
 
-# Inherit from a23xq device
+# Inherit device configuration
 $(call inherit-product, device/samsung/a23xq/device.mk)
 
-PRODUCT_DEVICE := a23xq
+PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/samsung/a23xq/recovery/root,recovery/root)
+
+# Default device path for tree
+DEVICE_PATH := device/samsung/a23xq
+
+## Device identifier. This must come after all inclusions
 PRODUCT_NAME := twrp_a23xq
-PRODUCT_BRAND := samsung
+PRODUCT_DEVICE := a23xq
 PRODUCT_MODEL := SM-A236B
+PRODUCT_BRAND := samsung
 PRODUCT_MANUFACTURER := samsung
-
 PRODUCT_GMS_CLIENTID_BASE := android-samsung
-
-PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRIVATE_BUILD_DESC="pb_a23xq-eng 12 SD2A.220601.004.B2 eng.runner.20250925.191404 test-keys"
-
-BUILD_FINGERPRINT := samsung/pb_a23xq/a23xq:12/SD2A.220601.004.B2/runner09251911:eng/test-keys
